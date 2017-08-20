@@ -8,7 +8,7 @@
 
     <table class="table show-table">
       <tbody>
-      {{#each model as |show|}}
+      {{#each showList as |show|}}
         <tr>
           <td>{{!-- #link-to 'shows' show --}}{{show.name}}{{!-- /link-to --}}</td>
           <td><button class="btn btn-primary btn-xs pull-right" {{action "deleteShow" show}}>Remove</button></td>
