@@ -1,4 +1,4 @@
-<!-- app/templates/shows.hbs -->
+<!-- app/templates/shows/index.hbs -->
 
 <div class="row">
   <div class="panel panel-default">
@@ -10,7 +10,7 @@
       <tbody>
       {{#each showList as |show|}}
         <tr>
-          <td>{{!-- #link-to 'shows' show --}}{{show.name}}{{!-- /link-to --}}</td>
+          <td>{{#link-to 'shows.show' show}}{{show.name}}{{/link-to}}</td>
           <td><button class="btn btn-primary btn-xs pull-right" {{action "deleteShow" show}}>Remove</button></td>
         </tr>
       {{/each}}
@@ -18,7 +18,7 @@
     </table>
 
     <div class="panel-footer">
-      <form class="form-inline" {{action "addShow" on="submit"}}>
+      <form class="form-inline" {{action "addShow" this on="submit"}}>
         <label>New show:</label>
         {{input class="form-control" type="text" value=name}}
         <button type="submit" class="btn btn-primary btn-sm" disabled={{isAddShowDisabled}}>Add</button>
