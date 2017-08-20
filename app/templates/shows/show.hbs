@@ -15,5 +15,29 @@
       <span class="lead"><strong>Schedule</strong></span>
     </div>
 
+    <table class="table">
+      <tbody>
+      {{#each model.elements as |element|}}
+        <tr>
+          <td>{{element.name}}</td>
+          <td>{{element.length}}</td>
+          <td><button class="btn btn-primary btn-xs pull-right" {{action "deleteItem" element}}>Remove</button></td>
+        </tr>
+      {{else}}
+        <tr><td>Enter a show element to get started.</td></tr>
+      {{/each}}
+      </tbody>
+    </table>
+
+    <div class="panel-footer">
+      <div class="form-inline">
+        <label>New element:</label>
+        {{input class="form-control" type="text" value=name placeholder="Name"}}
+        {{input class="form-control" type="number" value=length placeholder="Length"}}
+        <button class="btn btn-primary btn-sm" {{action "addElement" this}}>Add</button>
+      </div>
+    </div>
+
+
   </div>
 </div>
