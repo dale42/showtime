@@ -21,7 +21,7 @@
       <form class="form-inline" {{action "addShow" on="submit"}}>
         <label>New show:</label>
         {{input class="form-control" type="text" value=name}}
-        <button type="submit" class="btn btn-primary btn-sm">Add</button>
+        <button type="submit" class="btn btn-primary btn-sm" disabled={{isAddShowDisabled}}>Add</button>
       </form>
     </div>
   </div>
