@@ -22,8 +22,13 @@ export default Ember.Route.extend({
       });
     },
 
-    deleteItem(item) {
-      return item.destroyRecord();
+    deleteElement(element) {
+      return element.destroyRecord();
+    },
+
+    reorderElements(groupModel, elementModels, draggedModel) {
+      groupModel.set('elements', elementModels);
+      groupModel.save();
     }
 
   }
