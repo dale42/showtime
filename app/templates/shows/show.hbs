@@ -16,26 +16,27 @@
     </div>
 
     <table class="table">
-      <tbody>
-      {{#each model.elements as |element|}}
-        <tr>
-          <td>{{element.name}}</td>
-          <td>{{element.length}}</td>
-          <td><button class="btn btn-primary btn-xs pull-right" {{action "deleteItem" element}}>Remove</button></td>
-        </tr>
-      {{else}}
-        <tr><td>Enter a show element to get started.</td></tr>
-      {{/each}}
-      </tbody>
+      {{#sortable-group tagName="tbody" model=model onChange="reorderElements" as |group|}}
+        {{#each model.elements as |element|}}
+          {{#sortable-item tagName="tr" model=element group=group handle=".handle"}}
+            <td class="handle"><img src="/assets/images/drag_handle_24px.svg"/></td>
+            <td>{{element.name}}</td>
+            <td>{{element.length}}</td>
+            <td><button class="btn btn-primary btn-xs pull-right" {{action "deleteElement" element}}>Remove</button></td>
+          {{/sortable-item}}
+        {{else}}
+          <tr><td>Enter a show element to get started.</td></tr>
+        {{/each}}
+      {{/sortable-group}}
     </table>
 
     <div class="panel-footer">
-      <div class="form-inline">
+      <form class="form-inline" on="submit">
         <label>New element:</label>
         {{input class="form-control" type="text" value=name placeholder="Name"}}
         {{input class="form-control" type="number" value=length placeholder="Length"}}
-        <button class="btn btn-primary btn-sm" {{action "addElement" this}}>Add</button>
-      </div>
+        <button type="submit" class="btn btn-primary btn-sm" {{action "addElement" this}}>Add</button>
+      </form>
     </div>
 
 

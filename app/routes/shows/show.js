@@ -14,7 +14,7 @@ export default Ember.Route.extend({
         length: controller.get('length'),
         show: show
       });
-      // show.get('items').pushObject(newItem);
+
       return newElement.save().then(function () {
         show.save();
         controller.set('name', '');
@@ -22,8 +22,13 @@ export default Ember.Route.extend({
       });
     },
 
-    deleteItem(item) {
-      return item.destroyRecord();
+    deleteElement(element) {
+      return element.destroyRecord();
+    },
+
+    reorderElements(groupModel, elementModels, draggedModel) {
+      groupModel.set('elements', elementModels);
+      groupModel.save();
     }
 
   }
