@@ -14,7 +14,7 @@ export default Ember.Route.extend({
         length: controller.get('length'),
         show: show
       });
-      // show.get('items').pushObject(newItem);
+
       return newElement.save().then(function () {
         show.save();
         controller.set('name', '');

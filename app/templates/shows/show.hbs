@@ -30,12 +30,12 @@
     </table>
 
     <div class="panel-footer">
-      <div class="form-inline">
+      <form class="form-inline" on="submit">
         <label>New element:</label>
         {{input class="form-control" type="text" value=name placeholder="Name"}}
         {{input class="form-control" type="number" value=length placeholder="Length"}}
-        <button class="btn btn-primary btn-sm" {{action "addElement" this}}>Add</button>
-      </div>
+        <button type="submit" class="btn btn-primary btn-sm" {{action "addElement" this}}>Add</button>
+      </form>
     </div>
 
 
