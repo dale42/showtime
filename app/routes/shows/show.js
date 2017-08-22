@@ -26,7 +26,7 @@ export default Ember.Route.extend({
       return element.destroyRecord();
     },
 
-    reorderElements(groupModel, elementModels, draggedModel) {
+    reorderElements(groupModel, elementModels) {
       groupModel.set('elements', elementModels);
       groupModel.save();
     }
