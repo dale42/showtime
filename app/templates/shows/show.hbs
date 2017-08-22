@@ -19,7 +19,7 @@
       {{#sortable-group tagName="tbody" model=model onChange="reorderElements" as |group|}}
         {{#each model.elements as |element|}}
           {{#sortable-item tagName="tr" model=element group=group handle=".handle"}}
-            <td class="handle"><img src="/assets/images/drag_handle_24px.svg"/></td>
+            <td class="handle"><div class="draganddrop"></div></td>
             <td>{{element.name}}</td>
             <td>{{element.length}}</td>
             <td><button class="btn btn-primary btn-xs pull-right" {{action "deleteElement" element}}>Remove</button></td>

@@ -1,3 +1,30 @@
-td.handle img {
-  cursor: pointer;
+/* .draganddrop from Elyse Holladay at https://codepen.io/elyseholladay/pen/dqElr */
+.draganddrop {
+  display: inline-block;
+  border-top: 2px solid grey;
+  width: 25px;
+  padding-top: 2px;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
+.draganddrop:before,
+.draganddrop:after {
+  display: block;
+  content: "";
+  border-top: 2px solid grey;
+  padding-top: 2px;
+}
+
+.draganddrop:hover,
+.draganddrop:hover:before,
+.draganddrop:hover:after {
+  border-color: blue;
+}
+
+.draganddrop:active,
+.draganddrop:active:before,
+.draganddrop:active:after {
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
 }
