@@ -19,6 +19,7 @@ export default Ember.Route.extend({
         show.save();
         controller.set('name', '');
         controller.set('inputLength', '');
+        Ember.$('#element-name-input').focus();
       });
     },
 
