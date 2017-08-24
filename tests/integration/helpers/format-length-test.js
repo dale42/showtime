@@ -12,6 +12,6 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{format-length inputValue}}`);
 
-  assert.equal(this.$().text().trim(), '1234');
+  assert.equal(this.$().text().trim(), '20m 34s');
 });
 

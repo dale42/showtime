@@ -18,7 +18,7 @@ export default Ember.Route.extend({
       return newElement.save().then(function () {
         show.save();
         controller.set('name', '');
-        controller.set('length', '');
+        controller.set('inputLength', '');
       });
     },
 
