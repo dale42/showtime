@@ -5,6 +5,8 @@ export default Ember.Controller.extend({
 
   length: Ember.computed('inputLength', function () {
     return stringToSeconds(this.get('inputLength')).toString();
-  })
+  }),
+
+  isAddElementDisabled: Ember.computed.empty('name')
 
 });
