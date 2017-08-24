@@ -34,7 +34,8 @@
       <form class="form-inline" on="submit">
         <label>New element:</label>
         {{input class="form-control" type="text" value=name placeholder="Name"}}
-        {{input class="form-control" type="number" value=length placeholder="Length"}}
+        {{input class="form-control" type="text" value=inputLength placeholder="Length"}}
+        {{format-length length}}
         <button type="submit" class="btn btn-primary btn-sm" {{action "addElement" this}}>Add</button>
       </form>
     </div>
