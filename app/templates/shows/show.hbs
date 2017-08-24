@@ -13,6 +13,7 @@
 
     <div class="panel-heading">
       <span class="lead"><strong>Schedule</strong></span>
+      <div><strong>Total Length:</strong> {{format-length totalTime}}</div>
     </div>
 
     <table class="table">
@@ -31,12 +32,12 @@
     </table>
 
     <div class="panel-footer">
-      <form class="form-inline" on="submit">
+      <form class="form-inline" {{action "addElement" this on="submit"}}>
         <label>New element:</label>
-        {{input class="form-control" type="text" value=name placeholder="Name"}}
+        {{input class="form-control" type="text" value=name placeholder="Name" id="element-name-input"}}
         {{input class="form-control" type="text" value=inputLength placeholder="Length"}}
         {{format-length length}}
-        <button type="submit" class="btn btn-primary btn-sm" {{action "addElement" this}}>Add</button>
+        <button type="submit" class="btn btn-primary btn-sm" disabled={{isAddElementDisabled}} >Add</button>
       </form>
     </div>
 

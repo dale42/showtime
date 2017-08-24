@@ -19,11 +19,15 @@ export default Ember.Route.extend({
         show.save();
         controller.set('name', '');
         controller.set('inputLength', '');
+        Ember.$('#element-name-input').focus();
       });
     },
 
     deleteElement(element) {
-      return element.destroyRecord();
+      element.destroyRecord();
+      // Work around for issue where model isn't saved when last object deleted
+      // from hasMany relationship
+      this.get('controller').get('model').save();
     },
 
     reorderElements(groupModel, elementModels) {
