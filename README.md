@@ -6,11 +6,11 @@ This is a [100 Days of Code](http://100daysofcode.com/) project.
 
 ## Status 
 
-*Show Time* is currently not usuable in any practical way.
+*Show Time* is minimally usable.
 
-Show Time can add and remove shows and show elements. Total show time and element editing is not implemented, yet.</p>
+Shows and their elements can be added and removed and it keeps a running total of time.
 
-**Known Issues**
+## Known Issues
 
 * Drag and drop sorting is not working in Fire Fox
 
