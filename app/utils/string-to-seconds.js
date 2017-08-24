@@ -1,4 +1,7 @@
 export default function stringToSeconds(inputString) {
+  if (!inputString) {
+    return 0;
+  }
   const positionNotation = /^[0-9 ]+$/;
   let parsedTime = {seconds: 0, minutes: 0, hours: 0};
   inputString = inputString.replace(/[ :]+/g, ' ');
@@ -6,7 +9,8 @@ export default function stringToSeconds(inputString) {
   function positionalParse(timeString) {
     return timeString.split(' ').reverse().reduce((units, value, index) => {
       let key = Object.keys(units)[index];
-      units[key] = parseInt(value, 10);
+      let intValue = parseInt(value, 10);
+      units[key] = (isNaN(intValue)) ? 0 : intValue;
       return units;
     }, parsedTime);
   }
