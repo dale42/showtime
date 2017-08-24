@@ -24,7 +24,10 @@ export default Ember.Route.extend({
     },
 
     deleteElement(element) {
-      return element.destroyRecord();
+      element.destroyRecord();
+      // Work around for issue where model isn't saved when last object deleted
+      // from hasMany relationship
+      this.get('controller').get('model').save();
     },
 
     reorderElements(groupModel, elementModels) {
