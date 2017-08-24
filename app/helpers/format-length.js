@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export function formatLength(length) {
+  if (length == 0) {
+    return '---';
+  }
   let hms = [
     { unitName: 'h', value: Math.floor(length / 3600) },
     { unitName: 'm', value: Math.floor((length / 60) % 60) },
