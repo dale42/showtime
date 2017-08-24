@@ -14,7 +14,7 @@ Show Time can add and remove shows and show elements. Total show time and elemen
 
 * Drag and drop sorting is not working in Fire Fox
 
-##Data Storage
+## Data Storage
 
 ShowTime uses a web-browser feature named local storage to store your information. In many ways it makes your web-browser act like a desktop program.
 
