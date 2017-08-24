@@ -16,14 +16,15 @@ export default function stringToSeconds(inputString) {
   }
 
   function unitsParse(timeString) {
-    return timeString.split(' ').reduce((timeUnits, unitEntry) => {
-      let valueString = unitEntry.match(/\d+/)[0];
-      let unitString  = unitEntry.match(/[a-zA-Z]+/)[0].toLowerCase();
-      var unit = Object.keys(timeUnits).filter((timeUnit) => {
-        return (timeUnit.substr(0, unitString.length) == unitString);
-      })[0];
-      parsedTime[unit] = parseInt(valueString, 10);
-
+    return timeString.toLowerCase().split(' ').reduce((timeUnits, unitEntry) => {
+      let valueString = (unitEntry.match(/\d+/) || [0])[0];
+      let unitString  = (unitEntry.match(/[a-z]+/) || [''])[0];
+      if (valueString > 0 && unitString !== '') {
+        var unit = Object.keys(timeUnits).filter((timeUnit) => {
+          return (timeUnit.substr(0, unitString.length) == unitString);
+        })[0];
+        parsedTime[unit] = parseInt(valueString, 10);
+      }
       return parsedTime;
     }, parsedTime);
   }

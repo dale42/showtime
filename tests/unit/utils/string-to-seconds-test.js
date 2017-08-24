@@ -33,3 +33,8 @@ test('full text notation: 1m 5s', function(assert) {
   assert.equal(result, 65);
 });
 
+test('full text notation interim: 1m ', function(assert) {
+  let result = stringToSeconds('1m ');
+  assert.equal(result, 60);
+});
+
