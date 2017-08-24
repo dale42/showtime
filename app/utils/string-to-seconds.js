@@ -2,37 +2,32 @@ export default function stringToSeconds(inputString) {
   if (!inputString) {
     return 0;
   }
-  const positionNotation = /^[0-9 ]+$/;
-  let parsedTime = {seconds: 0, minutes: 0, hours: 0};
+
+  // 0:0:0 a form of positional notation. Switch ':' to ' ' and compress multiple
+  // spaces to a singe space.
   inputString = inputString.replace(/[ :]+/g, ' ');
 
-  function positionalParse(timeString) {
-    return timeString.split(' ').reverse().reduce((units, value, index) => {
-      let key = Object.keys(units)[index];
-      let intValue = parseInt(value, 10);
-      units[key] = (isNaN(intValue)) ? 0 : intValue;
-      return units;
-    }, parsedTime);
-  }
-
-  function unitsParse(timeString) {
-    return timeString.toLowerCase().split(' ').reduce((timeUnits, unitEntry) => {
-      let valueString = (unitEntry.match(/\d+/) || [0])[0];
-      let unitString  = (unitEntry.match(/[a-z]+/) || [''])[0];
-      if (valueString > 0 && unitString !== '') {
-        var unit = Object.keys(timeUnits).filter((timeUnit) => {
-          return (timeUnit.substr(0, unitString.length) == unitString);
-        })[0];
-        parsedTime[unit] = parseInt(valueString, 10);
-      }
-      return parsedTime;
-    }, parsedTime);
-  }
-
+  let parsedTime = {seconds: 0, minutes: 0, hours: 0};
+  const positionNotation = /^[0-9 ]+$/;
   if (positionNotation.test(inputString)) {
-    parsedTime = positionalParse(inputString);
+    parsedTime = inputString.split(' ').reverse().reduce((timeCollector, value, index) => {
+      let key = Object.keys(timeCollector)[index];
+      let intValue = parseInt(value, 10);
+      timeCollector[key] = (isNaN(intValue)) ? 0 : intValue;
+      return timeCollector;
+    }, parsedTime);
   } else {
-    parsedTime = unitsParse(inputString);
+    parsedTime = inputString.toLowerCase().split(' ').reduce((timeCollector, value) => {
+      let numericValue = (value.match(/\d+/)    || [''])[0];  // Default '' if no match
+      let unitValue    = (value.match(/[a-z]+/) || [''])[0];
+      if (numericValue !== '' && unitValue !== '') {
+        var unit = Object.keys(timeCollector).filter((unitName) => {
+          return (unitName.substr(0, unitValue.length) === unitValue);
+        })[0];
+        timeCollector[unit] = parseInt(numericValue, 10);
+      }
+      return timeCollector;
+    }, parsedTime);
   }
 
   return (parsedTime.hours * 3600) + (parsedTime.minutes * 60) + parsedTime.seconds;
