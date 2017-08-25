@@ -11,7 +11,7 @@
       {{#each showList as |show|}}
         <tr>
           <td>{{#link-to 'shows.show' show}}{{show.name}}{{/link-to}}</td>
-          <td><button class="btn btn-primary btn-xs pull-right" {{action "deleteShow" show}}>Remove</button></td>
+          <td><button class="btn btn-primary btn-xs pull-right" {{action (action (mut showToDelete) show)}}>Remove</button></td>
         </tr>
       {{/each}}
       </tbody>
@@ -26,3 +26,19 @@
     </div>
   </div>
 </div>
+
+{{#bs-modal-simple
+  class="showtime-modal"
+  title="Please confirm"
+  closeTitle="Cancel"
+  submitTitle="Delete"
+  size=null
+  fade=false
+  open=showToDelete
+  onSubmit=(action "deleteShow" showToDelete)
+  onHide=(action (mut showToDelete) null)
+}}
+  <p>You're about to delete the following show and all of it's show elements:</p>
+  <p class="text-center"><strong><em>{{showToDelete.name}}</em></strong></p>
+  <p>Are you sure?</p>
+{{/bs-modal-simple}}
