@@ -12,8 +12,7 @@
   <div class="panel panel-default">
 
     <div class="panel-heading">
-      <span class="lead"><strong>Schedule</strong></span>
-      <div><strong>Total Length:</strong> {{format-length totalTime}}</div>
+      <div><strong>Running Time:</strong> {{format-length totalTime}}</div>
     </div>
 
     <table class="table">
@@ -23,7 +22,7 @@
             <td class="handle"><div class="draganddrop"></div></td>
             <td>{{element.name}}</td>
             <td>{{format-length element.length}}</td>
-            <td><button class="btn btn-primary btn-xs pull-right" {{action "deleteElement" element}}>Remove</button></td>
+            <td><button class="btn btn-primary btn-xs pull-right" {{action (action (mut elementToDelete) element)}}>Remove</button></td>
           {{/sortable-item}}
         {{else}}
           <tr><td>Enter a show element to get started.</td></tr>
@@ -41,6 +40,23 @@
       </form>
     </div>
 
-
   </div>
 </div>
+
+{{#bs-modal-simple
+  class="showtime-modal"
+  title="Please confirm"
+  closeTitle="Cancel"
+  submitTitle="Delete"
+  size=null
+  fade=false
+  open=elementToDelete
+  onSubmit=(action "deleteElement" elementToDelete)
+  onHide=(action (mut elementToDelete) null)
+}}
+  <p>
+    You're about to delete:
+    <strong><em>{{elementToDelete.name}} ({{format-length elementToDelete.length}})</em></strong>
+  </p>
+  <p>Are you sure?</p>
+{{/bs-modal-simple}}

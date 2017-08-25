@@ -1,3 +1,5 @@
+// app/routes/shows.js
+
 import Ember from 'ember';
 
 export default Ember.Route.extend({
@@ -18,9 +20,7 @@ export default Ember.Route.extend({
       });
     },
 
-    deleteShow(show) {
-      return show.destroyRecord();
-    }
+    // deleteShow action is on controller/shows/index because of modal dialog
 
   }
 

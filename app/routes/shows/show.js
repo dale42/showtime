@@ -6,6 +6,8 @@ export default Ember.Route.extend({
   },
 
   actions: {
+    // deleteElement action is on controller because of modal dialog
+
     addElement(controller) {
       const show = controller.get('model');
 
@@ -21,13 +23,6 @@ export default Ember.Route.extend({
         controller.set('inputLength', '');
         Ember.$('#element-name-input').focus();
       });
-    },
-
-    deleteElement(element) {
-      element.destroyRecord();
-      // Work around for issue where model isn't saved when last object deleted
-      // from hasMany relationship
-      this.get('controller').get('model').save();
     },
 
     reorderElements(groupModel, elementModels) {
