@@ -28,3 +28,7 @@
   cursor: -webkit-grabbing;
   cursor: -moz-grabbing;
 }
+
+.showtime-modal {
+  margin-top: 25vh;
+}
