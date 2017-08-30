@@ -1,14 +1,19 @@
 # Show Time
 
-*Show Time* is a simple time planning tool for radio shows. Show items and their durations are added to a show and the total show length is displayed.
+*Show Time* is a simple time planning tool for radio shows. 
+Show elements and their durations are added to a show and the total show length is displayed.
+Elements can be edited and their order changed using "drag & drop".
+To provide a demo the browser's local storage is used.
+Please see the <strong><em>Data Storage</em></strong> section (below) for details.
+The show can be saved as a text file.
 
 This is a [100 Days of Code](http://100daysofcode.com/) project.
 
 ## Status 
 
-*Show Time* is minimally usable.
+There are known issues in Firefox and IE11. There are no known issues in Chrome.
 
-Shows and their elements can be added and removed and it keeps a running total of time.
+A number of new features are planned and will be added as time permits.
 
 ## Known Issues
 
