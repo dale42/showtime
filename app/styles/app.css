@@ -32,3 +32,12 @@
 .showtime-modal {
   margin-top: 25vh;
 }
+
+#formatted-length-display {
+  min-width: 8em;
+}
+
+#element-name-input {
+  min-width: 17em;
+  margin-right: 1em;
+}

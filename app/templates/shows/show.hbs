@@ -40,21 +40,31 @@
     </table>
 
     <div class="panel-footer">
+      <div class="h4">New element:</div>
       <form class="form-inline" {{action "addElement" this on="submit"}}>
-        <label>New element:</label>
-        {{input class="form-control" type="text" value=name placeholder="Name" id="element-name-input"}}
-        {{input class="form-control" type="text" value=inputLength placeholder="Length"}}
-        {{format-length length}}
-        <button type="submit" class="btn btn-primary btn-sm" disabled={{isAddElementDisabled}} >Add</button>
+        <div class="form-group">
+          <label for="element-name-input">Name:</label>
+          {{input class="form-control" type="text" value=name placeholder="Name" id="element-name-input"}}
+        </div>
+        <div class="form-group">
+          <label for="element-length-input">Length:</label>
+          <div class="input-group">
+              {{input id="element-length-input" class="form-control" type="text" value=inputLength placeholder="Length" id="element-length-input"}}
+              <span id="formatted-length-display" class="input-group-addon">{{format-length length}}</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <button id="add-element" type="submit" role="button" class="btn btn-primary btn-sm" disabled={{isAddElementDisabled}} >Add</button>
+        </div>
       </form>
     </div>
 
   </div>
 
-  <div class="row">
-    <button class="btn btn-primary" {{action "saveAsText"}} >Save as text</button>
-  </div>
+</div>
 
+<div class="row">
+  <button class="btn btn-primary" {{action "saveAsText"}} >Save as text</button>
 </div>
 
 {{#bs-modal-simple

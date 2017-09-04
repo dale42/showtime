@@ -1,52 +1,86 @@
-<div class="row" xmlns="http://www.w3.org/1999/html">
-  <p><em>Show Time</em> is a simple time planning tool for radio shows.</p>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="jumbotron">
+      <p><em>Show Time</em> is a simple time planning tool for radio shows.</p>
 
-  <p>
-    Show elements and their durations are added to a show and the total show length is displayed.
-    Elements can be edited and their order changed using "drag & drop".
-    To provide a demo the browser's local storage is used.
-    Please see the <strong><em>Data Storage</em></strong> section (below) for details.
-    The show can be saved as a text file.
-  </p>
+      <p>
+        Show elements with their respective lengths are added to a show and the total show length is displayed.
+        Elements can be edited and their order changed using drag & drop.
+        To provide this demo the browser's local storage is used.
+        Please see the <strong><em>Data Storage</em></strong> section (below) for details.
+        The show can be saved as a text file.
+      </p>
 
-  <p>This is a <a href="http://100daysofcode.com/">100 Days of Code</a> project.</p>
+      <p>This is a <a href="http://100daysofcode.com/">100 Days of Code</a> project.</p>
 
-  <p class="text-center">{{#link-to "shows"}}<button class="btn btn-primary btn-lg">Show Time Application</button> {{/link-to}}</p>
+      <p>Git Repository: <a href="https://github.com/dale42/showtime">github.com/dale42/showtime</a></p>
 
-  <h2>Status</h2>
+      <br>
 
-  <p>There are known issues in Firefox and IE11. There are no known issues in Chrome.</p>
+      <p class="text-center">{{#link-to "shows"}}<button class="btn btn-primary btn-lg">Show Time Application</button> {{/link-to}}</p>
+    </div>
+  </div>
 
-  <p>A number of new features are planned and will be added as time permits.</p>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Status</h2>
+      </div>
+      <div class="panel-body">
+        <p>The project is being actively worked on.</p>
+        <p>A number of new features are planned and will be added as time permits.</p>
+        <p>There are known issues in Firefox and IE11 (see below). There are no known issues in Chrome.</p>
+      </div>
+    </div>
+  </div>
 
-  <h2>Entering Time Lengths</h2>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Entering Time Lengths</h2>
+      </div>
+      <div class="panel-body">
+        <p>This information will added to the show page, but isn't there yet.</p>
+        <p>Valid formats for entering time are:</p>
+        <ul>
+          <li>1 2 3</li>
+          <li>1:2:3</li>
+          <li>1h 2m 3s</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-  <p>This information will added to the show page, but isn't there yet.</p>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Known Issues</h2>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <li>Drag and drop sorting is not working in Firefox or IE11</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-  <p>Valid formats for entering time are:</p>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Data Storage</h2>
+      </div>
+      <div class="panel-body">
+        <p>ShowTime uses a web-browser feature named local storage to store your information. In many ways it makes your web-browser act like a desktop program.</p>
 
-  <ul>
-    <li>1 2 3</li>
-    <li>1:2:3</li>
-    <li>1h 2m 3s</li>
-  </ul>
+        <strong>Please be aware of the following before using:</strong>
 
-  <h2>Known Issues</h2>
-
-  <ul>
-    <li>Drag and drop sorting is not working in Firefox or IE11</li>
-  </ul>
-
-  <h2>Data Storage</h2>
-
-  <p>ShowTime uses a web-browser feature named local storage to store your information. In many ways it makes your web-browser act like a desktop program.</p>
-
-  <strong>Please be aware of the following before using:</strong>
-
-  <ul>
-    <li>If you clear local storage in your web-browser you will delete your ShowTime information</li>
-    <li>Each web-browser has its own local storage. This means if you run ShowTime in Chrome, you will not see your information in FireFox, Edge, or Safari.</li>
-    <li>If you run ShowTime in an anonymous browser session, no data is saved when the browser window is closed.</li>
-  </ul>
+        <ul>
+          <li>If you clear local storage in your web-browser you will delete your ShowTime information</li>
+          <li>Each web-browser has its own local storage. This means if you run ShowTime in Chrome, you will not see your information in FireFox, Edge, or Safari.</li>
+          <li>If you run ShowTime in an anonymous browser session, no data is saved when the browser window is closed.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
 </div>
