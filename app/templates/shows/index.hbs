@@ -19,8 +19,8 @@
 
     <div class="panel-footer">
       <form class="form-inline" {{action "addShow" this on="submit"}}>
-        <label>New show:</label>
-        {{input class="form-control" type="text" value=name}}
+        <label for="input-showname">New show:</label>
+        {{input id="input-showname" class="form-control" type="text" value=name}}
         <button type="submit" class="btn btn-primary btn-sm" disabled={{isAddShowDisabled}}>Add</button>
       </form>
     </div>
