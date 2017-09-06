@@ -1,6 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  name:     DS.attr('string'),
-  elements: DS.hasMany('element')
+  name:       DS.attr('string'),
+  length:     DS.attr('number'),
+  startTime:  DS.attr('string'),
+  elements:   DS.hasMany('element')
 });

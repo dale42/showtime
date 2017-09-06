@@ -1,6 +1,7 @@
 // app/controllers/shows/index.js
 
 import Ember from 'ember';
+import stringToSeconds from '../../utils/string-to-seconds';
 
 export default Ember.Controller.extend({
   sortProperties: ['name:asc'],
@@ -16,6 +17,10 @@ export default Ember.Controller.extend({
   displayShowForm: false,
 
   inputNameValue: '',
+
+  length: Ember.computed('inputLength', function () {
+    return stringToSeconds(this.get('inputLength')).toString();
+  }),
 
   showFormButtonText: '',
 
@@ -58,6 +63,8 @@ export default Ember.Controller.extend({
       }
 
       show.set('name', form.inputNameValue);
+      show.set('length', this.get('length'));
+      show.set('startTime', form.startTime);
 
       return show.save().then(function () {
         if (doTransition) {

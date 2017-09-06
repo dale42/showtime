@@ -11,6 +11,8 @@
       {{#each showList as |show|}}
         <tr>
           <td>{{#link-to 'shows.show' show}}{{show.name}}{{/link-to}}</td>
+          <td>{{format-length show.length}}</td>
+          <td>{{show.startTime}}</td>
           <td>
             <div class="btn-toolbar">
               <div class="btn-group">
@@ -62,13 +64,17 @@
     {{#bs-form onSubmit=(action "saveShow" this) as |form|}}
       <label for="input-show-name">Name:</label>
       {{input id="input-show-name" class="form-control" type="text" value=inputNameValue autofocus=true}}
-      {{!--
-      <label for="input-show-length">Length:</label>
-      {{input id="input-show-length" class="form-control" type="text" value=length}}
+
+      <div class="form-group">
+        <label for="input-show-length">Length:</label>
+        <div class="input-group">
+          {{input id="input-show-length" class="form-control" type="text" value=inputLength placeholder="Length" id="element-length-input"}}
+          <span id="formatted-length-display" class="input-group-addon">{{format-length length}}</span>
+        </div>
+      </div>
 
       <label for="input-show-startTime">Start time:</label>
       {{input id="input-show-startTime" class="form-control" type="text" value=startTime}}
-      ---}}
     {{/bs-form}}
   {{/modal.body}}
   {{#modal.footer}}
