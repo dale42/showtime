@@ -12,7 +12,11 @@
   <div class="panel panel-default">
 
     <div class="panel-heading">
-      <div><strong>Running Time:</strong> {{format-length totalTime}}</div>
+      <div class="row">
+        <div class="col-sm-4"><strong>Start Time:</strong> {{model.startTime}}</div>
+        <div class="col-sm-4"><strong>Show Length:</strong> {{format-length model.length}}</div>
+        <div class="col-sm-4"><strong>Current Length:</strong> {{format-length totalTime}}</div>
+      </div>
     </div>
 
     <table class="table">
