@@ -1,5 +1,5 @@
 export default function secondsToDisplayLength(lengthInSeconds) {
-  if (lengthInSeconds == 0) {
+  if (isNaN(lengthInSeconds) || lengthInSeconds === 0) {
     return '---';
   }
   let hms = [
