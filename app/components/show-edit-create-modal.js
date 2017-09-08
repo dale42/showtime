@@ -40,7 +40,7 @@ export default Ember.Component.extend({
       let show = this.get('show');
 
       if (show === null) {
-        show = this.store.createRecord('show');
+        show = controller.get('store').createRecord('show');
         gotoShow = true;
       }
 

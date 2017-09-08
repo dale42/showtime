@@ -26,7 +26,7 @@
     </table>
 
     <div class="panel-footer">
-      {{#bs-button type="primary" size="xs" onClick=(action "openShowForm" null)}}Create show{{/bs-button}}
+      {{#bs-button type="primary" size="xs" onClick=(action (mut displayShowForm) true)}}Create show{{/bs-button}}
     </div>
   </div>
 </div>
@@ -47,39 +47,4 @@
   <p>Are you sure?</p>
 {{/bs-modal-simple}}
 
-{{#bs-modal
-  class="showtime-modal"
-  title="Add/Edit Show"
-  size=null
-  fade=false
-  open=displayShowForm
-  onShow=(action "populateShowForm" form)
-  onHide=(action (mut displayShowForm) false)
-  as |modal|
-}}
-  {{#modal.header}}
-    <h4 class="modal-title">Create/Edit show</h4>
-  {{/modal.header}}
-  {{#modal.body}}
-    {{#bs-form onSubmit=(action "saveShow" this) as |form|}}
-      <label for="input-show-name">Name:</label>
-      {{input id="input-show-name" class="form-control" type="text" value=inputNameValue autofocus=true}}
-
-      <div class="form-group">
-        <label for="input-show-length">Length:</label>
-        <div class="input-group">
-          {{input id="input-show-length" class="form-control" type="text" value=inputLength placeholder="Length" id="element-length-input"}}
-          <span id="formatted-length-display" class="input-group-addon">{{format-length length}}</span>
-        </div>
-      </div>
-
-      <label for="input-show-startTime">Start time:</label>
-      {{input id="input-show-startTime" class="form-control" type="text" value=startTime}}
-    {{/bs-form}}
-  {{/modal.body}}
-  {{#modal.footer}}
-    {{#bs-button onClick=(action modal.close)}}Cancel{{/bs-button}}
-    {{#bs-button type="primary" onClick=(action modal.submit)}}{{showFormButtonText}}{{/bs-button}}
-  {{/modal.footer}}
-
-{{/bs-modal}}
+{{show-edit-create-modal displayForm=displayShowForm show=null controller=this}}
