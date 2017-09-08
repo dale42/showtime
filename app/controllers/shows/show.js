@@ -23,6 +23,23 @@ export default Ember.Controller.extend({
     return stringToSeconds(this.get('editInputLength')).toString();
   }),
 
+  elementStartTime: Ember.computed('model.elements.@each.length', function() {
+    let startTimes = [0]; // Prime 1st element to start at 0
+    let runningTotal = 0;
+
+    // The first element of model.elements provides the start time for startTime[1]
+    // because array primed with 0.
+    this.get('model.elements').forEach((element) => {
+      const start = runningTotal + parseInt(element.get('length'), 10);
+      startTimes.push(start);
+      runningTotal = start;
+    });
+
+    return startTimes;
+  }),
+
+
+
   totalTime: Ember.computed('model.elements.@each.length', function() {
     let total = 0;
 

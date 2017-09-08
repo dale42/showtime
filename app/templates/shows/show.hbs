@@ -24,9 +24,10 @@
 
     <table class="table">
       {{#sortable-group tagName="tbody" model=model onChange="reorderElements" as |group|}}
-        {{#each model.elements as |element|}}
+        {{#each model.elements as |element elementPosition|}}
           {{#sortable-item tagName="tr" model=element group=group handle=".handle"}}
             <td class="handle"><div class="draganddrop"></div></td>
+            <td>{{format-length (get elementStartTime elementPosition) 'colon'}}</td>
             <td>{{element.name}}</td>
             <td>{{format-length element.length}}</td>
             <td>
