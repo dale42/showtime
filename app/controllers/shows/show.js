@@ -5,6 +5,7 @@ import stringToSeconds from '../../utils/string-to-seconds';
 import secondsToDisplayLength from '../../utils/seconds-to-display-length';
 
 export default Ember.Controller.extend({
+  displayShowForm: false,
 
   elementToDelete: null,
 

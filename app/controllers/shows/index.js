@@ -63,7 +63,7 @@ export default Ember.Controller.extend({
       }
 
       show.set('name', form.inputNameValue);
-      show.set('length', this.get('length'));
+      show.set('showLength', this.get('length'));
       show.set('startTime', form.startTime);
 
       return show.save().then(function () {

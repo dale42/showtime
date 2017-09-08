@@ -5,7 +5,10 @@
 </div>
 
 <div class="row">
-  <h1>{{model.name}}</h1>
+  <h1>
+    {{model.name}}
+    {{#bs-button type="primary" size="xs" onClick=(action (mut displayShowForm) true)}}Edit{{/bs-button}}
+  </h1>
 </div>
 
 <div class="row">
@@ -14,7 +17,7 @@
     <div class="panel-heading">
       <div class="row">
         <div class="col-sm-4"><strong>Start Time:</strong> {{model.startTime}}</div>
-        <div class="col-sm-4"><strong>Show Length:</strong> {{format-length model.length}}</div>
+        <div class="col-sm-4"><strong>Show Length:</strong> {{format-length model.showLength}}</div>
         <div class="col-sm-4"><strong>Current Length:</strong> {{format-length totalTime}}</div>
       </div>
     </div>
@@ -107,3 +110,5 @@
   </p>
   <p>Are you sure?</p>
 {{/bs-modal-simple}}
+
+{{show-ed-create-modal displayForm=displayShowForm show=model controller=this}}

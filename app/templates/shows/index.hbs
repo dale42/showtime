@@ -11,7 +11,7 @@
       {{#each showList as |show|}}
         <tr>
           <td>{{#link-to 'shows.show' show}}{{show.name}}{{/link-to}}</td>
-          <td>{{format-length show.length}}</td>
+          <td>{{format-length show.showLength}}</td>
           <td>{{show.startTime}}</td>
           <td>
             <div class="btn-toolbar">
