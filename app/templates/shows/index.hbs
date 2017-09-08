@@ -11,18 +11,22 @@
       {{#each showList as |show|}}
         <tr>
           <td>{{#link-to 'shows.show' show}}{{show.name}}{{/link-to}}</td>
-          <td><button class="btn btn-primary btn-xs pull-right" {{action (action (mut showToDelete) show)}}>Remove</button></td>
+          <td>{{format-length show.showLength}}</td>
+          <td>{{show.startTime}}</td>
+          <td>
+            <div class="btn-toolbar">
+              <div class="btn-group">
+                <button class="btn btn-primary btn-xs" {{action (action (mut showToDelete) show)}}>Remove</button>
+              </div>
+            </div>
+          </td>
         </tr>
       {{/each}}
       </tbody>
     </table>
 
     <div class="panel-footer">
-      <form class="form-inline" {{action "addShow" this on="submit"}}>
-        <label for="input-showname">New show:</label>
-        {{input id="input-showname" class="form-control" type="text" value=name}}
-        <button type="submit" class="btn btn-primary btn-sm" disabled={{isAddShowDisabled}}>Add</button>
-      </form>
+      {{#bs-button type="primary" size="xs" onClick=(action (mut displayShowForm) true)}}Create show{{/bs-button}}
     </div>
   </div>
 </div>
@@ -42,3 +46,5 @@
   <p class="text-center"><strong><em>{{showToDelete.name}}</em></strong></p>
   <p>Are you sure?</p>
 {{/bs-modal-simple}}
+
+{{show-edit-create-modal displayForm=displayShowForm show=null controller=this}}
