@@ -35,6 +35,7 @@ export default Ember.Route.extend({
     },
 
     saveAsText() {
+      const elementStartTime = this.controller.get('elementStartTime');
       const show = this.controller.get('model');
       const showName = show.get('name');
       const longestNameLength = show.get('elements').reduce((longestLength, element) => {
@@ -46,11 +47,12 @@ export default Ember.Route.extend({
       output.push(`${showName}\r\n`);
       output.push('='.repeat(showName.length) + '\r\n\r\n');
       output.push('Run time: ' + secondsToDisplayLength(this.controller.get('totalTime')) + '\r\n\n');
-      show.get('elements').forEach(element => {
+      show.get('elements').forEach((element, position) => {
+        const startTime = secondsToDisplayLength(elementStartTime[position], 'colon');
         const elementDisplayWidth = longestNameLength + 2;
         const displayElement = element.get('name') + ' '.repeat(elementDisplayWidth - element.get('name').length);
         const displayLength = secondsToDisplayLength(element.get('length'));
-        output.push(`- ${displayElement}${displayLength}\r\n`);
+        output.push(`- ${startTime} ${displayElement}${displayLength}\r\n`);
       });
 
       let blob = new Blob(output, {type: "text/plain;charset=utf-8"});

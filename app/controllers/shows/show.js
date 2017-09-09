@@ -38,8 +38,6 @@ export default Ember.Controller.extend({
     return startTimes;
   }),
 
-
-
   totalTime: Ember.computed('model.elements.@each.length', function() {
     let total = 0;
 
@@ -49,6 +47,10 @@ export default Ember.Controller.extend({
     });
 
     return total;
+  }),
+
+  overUnder: Ember.computed('model.elements.@each.length', 'model.slotLength', function() {
+    return this.get('totalTime') - this.get('model').get('slotLength');
   }),
 
   actions: {
