@@ -1,7 +1,15 @@
 export default function secondsToDisplayLength(lengthInSeconds, format) {
-  if (isNaN(lengthInSeconds) || lengthInSeconds === 0) {
-    return '---';
+  if (isNaN(lengthInSeconds)) {
+    return '';
   }
+  if (lengthInSeconds === 0) {
+    if (format === 'colon') {
+      return '00:00:00';
+    } else {
+      return '---';
+    }
+  }
+
   let hms = [
     { unitName: 'h', value: Math.floor(lengthInSeconds / 3600) },
     { unitName: 'm', value: Math.floor((lengthInSeconds / 60) % 60) },
