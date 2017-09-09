@@ -49,8 +49,8 @@ export default Ember.Controller.extend({
     return total;
   }),
 
-  overUnder: Ember.computed('model.elements.@each.length', 'model.length', function() {
-    return this.get('totalTime') - this.get('model').get('showLength');
+  overUnder: Ember.computed('model.elements.@each.length', 'model.slotLength', function() {
+    return this.get('totalTime') - this.get('model').get('slotLength');
   }),
 
   actions: {

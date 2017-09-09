@@ -25,9 +25,9 @@ export default Ember.Component.extend({
         // Editing existing show
         this.set('dialogTitle', 'Edit: ' + show.get('name'));
         this.set('submitButtonText', 'Update');
-        const showLength = (show.get('showLength') === 0) ? '' : secondsToDisplayLength(show.get('showLength'));
+        const slotLength = (show.get('slotLength') === 0) ? '' : secondsToDisplayLength(show.get('slotLength'));
         this.set('name', show.get('name'));
-        this.set('inputLength', showLength);
+        this.set('inputLength', slotLength);
         this.set('startTime', show.get('startTime'));
       }
     },
@@ -45,7 +45,7 @@ export default Ember.Component.extend({
       }
 
       show.set('name', form.name);
-      show.set('showLength', this.get('length'));
+      show.set('slotLength', this.get('length'));
       show.set('startTime', form.startTime);
 
       return show.save().then(function () {

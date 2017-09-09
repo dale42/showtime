@@ -21,12 +21,16 @@
       </div>
 
       <div class="form-group">
-        <label for="show-modal-length">Length:</label>
+        <label for="show-modal-length">Slot Length:</label>
         <div class="input-group">
           {{input id="show-modal-length" class="form-control" type="text" value=inputLength placeholder="Length" id="show-modal-length"}}
           <span id="formatted-length-display" class="input-group-addon">{{format-length length}}</span>
         </div>
-        <p class="help-block">The time length of the show. For example: 1 hour, 30 minutes.</p>
+        <p class="help-block">
+          The length of the time slot the show will play in. For example: 1 hour, 30 minutes.
+          <br>This field is not required. If provided, an over/under difference of show length
+          versus slot length is given on the show page.
+        </p>
       </div>
 
       <div class="form-group">
