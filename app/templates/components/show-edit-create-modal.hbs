@@ -14,8 +14,11 @@
   {{#modal.body}}
 
     {{#bs-form onSubmit=(action "saveShow" this) as |form|}}
-      <label for="show-modal-name">Name:</label>
-      {{input id="show-modal-name" class="form-control" type="text" value=name autofocus=true}}
+      <div class="form-group">
+        <label for="show-modal-name">Name:</label>
+        {{input id="show-modal-name" class="form-control" type="text" value=name autofocus=true}}
+        <p class="help-block">The name of the show.</p>
+      </div>
 
       <div class="form-group">
         <label for="show-modal-length">Length:</label>
@@ -23,10 +26,17 @@
           {{input id="show-modal-length" class="form-control" type="text" value=inputLength placeholder="Length" id="show-modal-length"}}
           <span id="formatted-length-display" class="input-group-addon">{{format-length length}}</span>
         </div>
+        <p class="help-block">The time length of the show. For example: 1 hour, 30 minutes.</p>
       </div>
 
-      <label for="show-modal-startTime">Start time:</label>
-      {{input id="show-modal-startTime" class="form-control" type="text" value=startTime placeholder="Start time"}}
+      <div class="form-group">
+        <label for="show-modal-startTime">Start time:</label>
+        {{input id="show-modal-startTime" class="form-control" type="text" value=startTime placeholder="Start time"}}
+        <p class="help-block">
+          The time the show starts. For example: 8pm, 8:30am.
+          <br>If blank or 0, the show start time is set to 00:00:00.
+        </p>
+      </div>
     {{/bs-form}}
 
   {{/modal.body}}
