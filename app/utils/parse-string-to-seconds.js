@@ -17,7 +17,9 @@
  * @returns {object}
  */
 export default function parseStringToSeconds(inputString) {
-  if (inputString === '') {
+  if (inputString === undefined) {
+    return { duration: NaN, isValid: false, errorMsg: 'Input is undefined'};
+  } else if (inputString === '') {
     return { duration: NaN, isValid: false, errorMsg: 'Input is an empty string'};
   } else if (inputString === '0') {
     return { duration: 0, isValid: true, errorMsg: null};
@@ -40,17 +42,18 @@ export default function parseStringToSeconds(inputString) {
     parsedTime = inputString.toLowerCase().replace(/hr/, 'h').trim().split(' ').reduce((accumulator, value) => {
       const numericValue = (value.match(/\d+/)    || [''])[0];  // Default '' if no match
       const unitValue    = (value.match(/[a-z]+/) || [''])[0];
-      if (numericValue !== '' && unitValue !== '') {
-        const unit = ['seconds', 'minutes', 'hours'].filter((unitName) => {
-          return (unitName.substr(0, unitValue.length) === unitValue);
-        })[0];
-        if (unit === undefined) {
-          accumulator.errorMsg.push(`I do not understand the unit: ${unitValue}`);
-        } else if (accumulator.hasOwnProperty(unit)) {
-          accumulator.errorMsg.push(`There are multiple values given for ${unit}`);
-        } else {
-          accumulator[unit] = parseInt(numericValue, 10);
-        }
+      const unit = ['seconds', 'minutes', 'hours'].filter((unitName) => {
+        return (unitName.substr(0, unitValue.length) === unitValue);
+      })[0];
+
+      if (unit === undefined) {
+        accumulator.errorMsg.push(`I do not understand the unit: ${unitValue}`);
+      } else if (accumulator.hasOwnProperty(unit)) {
+        accumulator.errorMsg.push(`There are multiple values given for ${unit}`);
+      } else if (numericValue.length === 0) {
+        accumulator.errorMsg.push(`No value given for ${unit}`);
+      } else {
+        accumulator[unit] = parseInt(numericValue, 10);
       }
       return accumulator;
     }, {errorMsg: []});
