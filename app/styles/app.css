@@ -29,11 +29,11 @@
   cursor: -moz-grabbing;
 }
 
-.showtime-modal {
-  margin-top: 25vh;
-}
+/*.showtime-modal {*/
+  /*margin-top: 25vh;*/
+/*}*/
 
-#formatted-length-display {
+#formatted-slot-length-display {
   min-width: 8em;
 }
 

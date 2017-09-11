@@ -20,12 +20,23 @@
         <p class="help-block">The name of the show.</p>
       </div>
 
-      <div class="form-group">
-        <label for="show-modal-length">Slot Length:</label>
+      <div class="form-group {{if slotLengthErrorMessage 'has-error'}}">
+        <label for="show-modal-slot-length">Slot Length:</label>
         <div class="input-group">
-          {{input id="show-modal-length" class="form-control" type="text" value=inputLength placeholder="Length" id="show-modal-length"}}
-          <span id="formatted-length-display" class="input-group-addon">{{format-length length}}</span>
+          {{input id="show-modal-slot-length"
+                  class="form-control"
+                  type="text" value=inputSlotLength placeholder="Length"
+                  id="show-modal-length"
+          }}
+          <span id="formatted-slot-length-display" class="input-group-addon">{{format-length slotLength.duration}}</span>
         </div>
+        {{#if slotLengthErrorMessage}}
+          <div>
+            <div id="show-model-slot-length-input-error-message" class="alert alert-danger text-center" role="alert">
+              {{slotLengthErrorMessage}}
+            </div>
+          </div>
+        {{/if}}
         <p class="help-block">
           The length of the time slot the show will play in. For example: 1 hour, 30 minutes.
           <br>This field is not required. If provided, an over/under difference of show length
@@ -46,7 +57,7 @@
   {{/modal.body}}
   {{#modal.footer}}
     {{#bs-button onClick=(action modal.close)}}Cancel{{/bs-button}}
-    {{#bs-button type="primary" onClick=(action modal.submit)}}{{submitButtonText}}{{/bs-button}}
+    {{#bs-button type="primary" onClick=(action modal.submit)  disabled=isSubmitButtonDisabled}}{{submitButtonText}}{{/bs-button}}
   {{/modal.footer}}
 
 {{/bs-modal}}

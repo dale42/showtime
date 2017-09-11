@@ -1,14 +1,40 @@
 import Ember from 'ember';
-import stringToSeconds from '../utils/string-to-seconds';
+import parseStringToSeconds from '../utils/parse-string-to-seconds';
 import secondsToDisplayLength from '../utils/seconds-to-display-length';
 
 export default Ember.Component.extend({
 
+  // Initial form variable values
+  name: '',
+  inputSlotLength: '',
   dialogTitle: '',
   submitButtonText: '',
 
-  length: Ember.computed('inputLength', function () {
-    return stringToSeconds(this.get('inputLength'));
+  slotLength: Ember.computed('inputSlotLength', function () {
+    return parseStringToSeconds(this.get('inputSlotLength'));
+  }),
+
+  slotLengthErrorMessage: Ember.computed('inputSlotLength', function () {
+    const slotLength = this.get('slotLength');
+    const slotLengthHasInput  = (this.get('inputSlotLength').length > 0);
+    if (slotLengthHasInput && !slotLength.isValid) {
+      return slotLength.errorMsg;
+    }
+    return '';
+  }),
+
+  isSubmitButtonDisabled: Ember.computed('name', 'inputSlotLength', function () {
+    const nameLength        = this.get('name').length;
+    const inputSlotLength   = this.get('inputSlotLength').length;
+    const isSlotLengthValid = this.get('slotLength').isValid;
+
+    if (nameLength > 0 && inputSlotLength === 0) {
+      return false;
+    } else if (nameLength > 0 && inputSlotLength > 0 && isSlotLengthValid) {
+      return false;
+    }
+
+    return true;
   }),
 
   actions: {
