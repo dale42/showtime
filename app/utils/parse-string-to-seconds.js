@@ -28,6 +28,8 @@ export default function parseStringToSeconds(inputString) {
   // 0:0:0 is a form of positional notation. Switch ':' to ' ' and compress multiple
   // spaces to a singe space.
   inputString = inputString.replace(/[ :]+/g, ' ');
+  // Remove spaces between values and units. i.e. "1 h" becomes "1h"
+  inputString = inputString.replace(/(\d) +([a-zA-Z])/g, '$1$2');
 
   let parsedTime;
   const positionNotation = /^[0-9 ]+$/;
@@ -42,9 +44,14 @@ export default function parseStringToSeconds(inputString) {
     parsedTime = inputString.toLowerCase().replace(/hr/, 'h').trim().split(' ').reduce((accumulator, value) => {
       const numericValue = (value.match(/\d+/)    || [''])[0];  // Default '' if no match
       const unitValue    = (value.match(/[a-z]+/) || [''])[0];
-      const unit = ['seconds', 'minutes', 'hours'].filter((unitName) => {
-        return (unitName.substr(0, unitValue.length) === unitValue);
-      })[0];
+      let unit;
+      if (unitValue.length === 0) {
+        unit = '';
+      } else {
+        unit = ['seconds', 'minutes', 'hours'].filter((unitName) => {
+          return (unitName.substr(0, unitValue.length) === unitValue);
+        })[0];
+      }
 
       if (unit === undefined) {
         accumulator.errorMsg.push(`"${unitValue}" is not a unit of time I understand. Please use h, m, or s.`);
