@@ -33,7 +33,8 @@
   /*margin-top: 25vh;*/
 /*}*/
 
-#formatted-slot-length-display {
+#formatted-slot-length-display,
+#formatted-length-display {
   min-width: 8em;
 }
 
