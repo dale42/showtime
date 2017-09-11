@@ -66,6 +66,13 @@ test('Units notation: trailing space 1h', function(assert) {
   assert.equal(result.errorMsg, null)
 });
 
+test('Units notation: unit value space "1 h"', function(assert) {
+  let result = parseStringToSeconds('1 h');
+  assert.equal(result.duration, 3600);
+  assert.ok(result.isValid);
+  assert.equal(result.errorMsg, null)
+});
+
 test('Units notation: "hr" for hours', function(assert) {
   let result = parseStringToSeconds('1hr');
   assert.equal(result.duration, 3600);

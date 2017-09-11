@@ -38,15 +38,6 @@ export default Ember.Controller.extend({
     return parseStringToSeconds(this.get('inputLength'));
   }),
 
-  lengthErrorClass: Ember.computed('length', function () {
-    const invalidLength   = !this.get('length').isValid;
-    const lengthHasInput  = (this.get('inputLength').length > 0);
-    if (lengthHasInput && invalidLength) {
-      return 'has-error';
-    }
-    return '';
-  }),
-
   lengthErrorMessage: Ember.computed('length', function () {
     const length          = this.get('length');
     const lengthHasInput  = (this.get('inputLength').length > 0);

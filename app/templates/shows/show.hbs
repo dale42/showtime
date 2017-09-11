@@ -18,7 +18,10 @@
       <div class="row">
         <div class="col-sm-4"><strong>Start Time:</strong> {{model.startTime}}</div>
         <div class="col-sm-4"><strong>Slot Length:</strong> {{format-length model.slotLength}}</div>
-        <div class="col-sm-4"><strong>Show Length:</strong> {{format-length totalTime}} ({{overUnder}})</div>
+        <div class="col-sm-4">
+          <strong>Show Length:</strong> {{format-length totalTime}}
+          {{#if model.slotLength}}({{overUnder}}){{/if}}
+        </div>
       </div>
     </div>
 
@@ -54,7 +57,7 @@
           <label for="element-name-input">Name:</label>
           {{input class="form-control" type="text" value=name placeholder="Name" id="element-name-input"}}
         </div>
-        <div class="form-group {{lengthErrorClass}}">
+        <div class="form-group {{if lengthErrorMessage 'has-error'}}">
           <label for="element-length-input">Length:</label>
           <div class="input-group">
             {{input id="element-length-input" class="form-control" type="text" value=inputLength placeholder="Length" id="element-length-input"}}

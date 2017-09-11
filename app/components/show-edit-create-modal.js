@@ -1,14 +1,40 @@
 import Ember from 'ember';
-import stringToSeconds from '../utils/string-to-seconds';
+import parseStringToSeconds from '../utils/parse-string-to-seconds';
 import secondsToDisplayLength from '../utils/seconds-to-display-length';
 
 export default Ember.Component.extend({
 
+  // Initial form variable values
+  name: '',
+  inputSlotLength: '',
   dialogTitle: '',
   submitButtonText: '',
 
-  length: Ember.computed('inputLength', function () {
-    return stringToSeconds(this.get('inputLength'));
+  slotLength: Ember.computed('inputSlotLength', function () {
+    return parseStringToSeconds(this.get('inputSlotLength'));
+  }),
+
+  slotLengthErrorMessage: Ember.computed('inputSlotLength', function () {
+    const slotLength = this.get('slotLength');
+    const slotLengthHasInput  = (this.get('inputSlotLength').length > 0);
+    if (slotLengthHasInput && !slotLength.isValid) {
+      return slotLength.errorMsg;
+    }
+    return '';
+  }),
+
+  isSubmitButtonDisabled: Ember.computed('name', 'inputSlotLength', function () {
+    const nameLength        = this.get('name').length;
+    const inputSlotLength   = this.get('inputSlotLength').length;
+    const isSlotLengthValid = this.get('slotLength').isValid;
+
+    if (nameLength > 0 && inputSlotLength === 0) {
+      return false;
+    } else if (nameLength > 0 && inputSlotLength > 0 && isSlotLengthValid) {
+      return false;
+    }
+
+    return true;
   }),
 
   actions: {
@@ -19,7 +45,7 @@ export default Ember.Component.extend({
         this.set('dialogTitle', 'Create show');
         this.set('submitButtonText', 'Create');
         this.set('name', '');
-        this.set('inputLength', '');
+        this.set('inputSlotLength', '');
         this.set('startTime', '');
       } else {
         // Editing existing show
@@ -27,7 +53,7 @@ export default Ember.Component.extend({
         this.set('submitButtonText', 'Update');
         const slotLength = (show.get('slotLength') === 0) ? '' : secondsToDisplayLength(show.get('slotLength'));
         this.set('name', show.get('name'));
-        this.set('inputLength', slotLength);
+        this.set('inputSlotLength', slotLength);
         this.set('startTime', show.get('startTime'));
       }
     },
@@ -45,7 +71,7 @@ export default Ember.Component.extend({
       }
 
       show.set('name', form.name);
-      show.set('slotLength', this.get('length'));
+      show.set('slotLength', this.get('slotLength').duration);
       show.set('startTime', form.startTime);
 
       return show.save().then(function () {
