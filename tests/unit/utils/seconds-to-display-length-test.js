@@ -6,5 +6,5 @@ module('Unit | Utility | seconds to display length');
 // Replace this with your real tests.
 test('it works', function(assert) {
   let result = secondsToDisplayLength();
-  assert.ok(result);
+  assert.equal(result, '');
 });

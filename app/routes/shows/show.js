@@ -17,7 +17,7 @@ export default Ember.Route.extend({
 
       let newElement = this.store.createRecord('element', {
         name: controller.get('name'),
-        length: controller.get('length'),
+        length: controller.get('length.duration'),
         show: show
       });
 
