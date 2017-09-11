@@ -73,6 +73,13 @@ test('Units notation: "hr" for hours', function(assert) {
   assert.equal(result.errorMsg, null)
 });
 
+test('Units notation: Incomplete 2 value', function(assert) {
+  let result = parseStringToSeconds('1h 1');
+  assert.equal(result.duration, 3600);
+  assert.ok(result.isValid);
+  assert.equal(result.errorMsg, null)
+});
+
 test('Units notation: Multiple units "1m 1m"', function(assert) {
   let result = parseStringToSeconds('1m 1m');
   assert.ok(isNaN(result.duration));
@@ -84,14 +91,14 @@ test('Units notation: Invalid unit with time value "1mins"', function(assert) {
   let result = parseStringToSeconds('1mins');
   assert.ok(isNaN(result.duration));
   assert.notOk(result.isValid);
-  assert.equal(result.errorMsg, 'I do not understand the unit: mins')
+  assert.equal(result.errorMsg, '"mins" is not a unit of time I understand. Please use h, m, or s.')
 });
 
 test('Units notation: Invalid unit without time value "q"', function(assert) {
   let result = parseStringToSeconds('q');
   assert.ok(isNaN(result.duration));
   assert.notOk(result.isValid);
-  assert.equal(result.errorMsg, 'I do not understand the unit: q')
+  assert.equal(result.errorMsg, '"q" is not a unit of time I understand. Please use h, m, or s.')
 });
 
 test('Units notation: Valid time unit without time: "m"', function(assert) {

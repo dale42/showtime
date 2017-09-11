@@ -47,12 +47,12 @@ export default function parseStringToSeconds(inputString) {
       })[0];
 
       if (unit === undefined) {
-        accumulator.errorMsg.push(`I do not understand the unit: ${unitValue}`);
+        accumulator.errorMsg.push(`"${unitValue}" is not a unit of time I understand. Please use h, m, or s.`);
       } else if (accumulator.hasOwnProperty(unit)) {
         accumulator.errorMsg.push(`There are multiple values given for ${unit}`);
       } else if (numericValue.length === 0) {
         accumulator.errorMsg.push(`No value given for ${unit}`);
-      } else {
+      } else if (unit.length > 0 && unitValue.length > 0) {
         accumulator[unit] = parseInt(numericValue, 10);
       }
       return accumulator;
