@@ -2,6 +2,7 @@
 
 import Ember from 'ember';
 import stringToSeconds from '../../utils/string-to-seconds';
+import parseStringToSeconds from '../../utils/parse-string-to-seconds';
 import secondsToDisplayLength from '../../utils/seconds-to-display-length';
 
 export default Ember.Controller.extend({
@@ -9,14 +10,50 @@ export default Ember.Controller.extend({
 
   elementToDelete: null,
 
-  elementToEdit: null,
-  editInputName: '',
-  editInputLength: '',
+  name:         '',
+  inputLength:  '',
 
-  isAddElementDisabled: Ember.computed.empty('name'),
+  elementToEdit:    null,
+  editInputName:    '',
+  editInputLength:  '',
+
+  isAddElementDisabled: Ember.computed('name', 'inputLength', function () {
+    const name        = this.get('name');
+    const inputLength = this.get('inputLength');
+    const length      = this.get('length');
+
+    if (name === '') {
+      return true;
+    }
+    // It's ok to enter an empty value for length, but if something is entered
+    // it needs to be correct.
+    if (inputLength.length > 0 && !length.isValid) {
+      return true;
+    }
+
+    return false;
+  }),
 
   length: Ember.computed('inputLength', function () {
-    return stringToSeconds(this.get('inputLength')).toString();
+    return parseStringToSeconds(this.get('inputLength'));
+  }),
+
+  lengthErrorClass: Ember.computed('length', function () {
+    const invalidLength   = !this.get('length').isValid;
+    const lengthHasInput  = (this.get('inputLength').length > 0);
+    if (lengthHasInput && invalidLength) {
+      return 'has-error';
+    }
+    return '';
+  }),
+
+  lengthErrorMessage: Ember.computed('length', function () {
+    const length          = this.get('length');
+    const lengthHasInput  = (this.get('inputLength').length > 0);
+    if (lengthHasInput && !length.isValid) {
+      return length.errorMsg;
+    }
+    return '';
   }),
 
   editLength: Ember.computed('editInputLength', function () {

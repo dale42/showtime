@@ -54,17 +54,24 @@
           <label for="element-name-input">Name:</label>
           {{input class="form-control" type="text" value=name placeholder="Name" id="element-name-input"}}
         </div>
-        <div class="form-group">
+        <div class="form-group {{lengthErrorClass}}">
           <label for="element-length-input">Length:</label>
           <div class="input-group">
-              {{input id="element-length-input" class="form-control" type="text" value=inputLength placeholder="Length" id="element-length-input"}}
-              <span id="formatted-length-display" class="input-group-addon">{{format-length length}}</span>
+            {{input id="element-length-input" class="form-control" type="text" value=inputLength placeholder="Length" id="element-length-input"}}
+            <span id="formatted-length-display" class="input-group-addon">{{format-length length.duration}}</span>
           </div>
         </div>
         <div class="form-group">
           <button id="add-element" type="submit" role="button" class="btn btn-primary btn-sm" disabled={{isAddElementDisabled}} >Add</button>
         </div>
       </form>
+      {{#if lengthErrorMessage}}
+        <div>
+          <div id="length-input-error-message" class="alert alert-danger text-center" role="alert">
+            {{lengthErrorMessage}}
+          </div>
+        </div>
+      {{/if}}
     </div>
 
   </div>
