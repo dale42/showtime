@@ -71,7 +71,7 @@ export default Ember.Component.extend({
       }
 
       show.set('name', form.name);
-      show.set('slotLength', this.get('length'));
+      show.set('slotLength', this.get('slotLength').duration);
       show.set('startTime', form.startTime);
 
       return show.save().then(function () {
