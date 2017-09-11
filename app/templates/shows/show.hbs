@@ -54,7 +54,7 @@
           <label for="element-name-input">Name:</label>
           {{input class="form-control" type="text" value=name placeholder="Name" id="element-name-input"}}
         </div>
-        <div class="form-group {{lengthErrorClass}}">
+        <div class="form-group {{if lengthErrorMessage 'has-error'}}">
           <label for="element-length-input">Length:</label>
           <div class="input-group">
             {{input id="element-length-input" class="form-control" type="text" value=inputLength placeholder="Length" id="element-length-input"}}
