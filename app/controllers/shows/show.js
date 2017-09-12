@@ -1,7 +1,6 @@
 // app/controllers/shows/show.js
 
 import Ember from 'ember';
-import stringToSeconds from '../../utils/string-to-seconds';
 import parseStringToSeconds from '../../utils/parse-string-to-seconds';
 import secondsToDisplayLength from '../../utils/seconds-to-display-length';
 
@@ -48,7 +47,7 @@ export default Ember.Controller.extend({
   }),
 
   editLength: Ember.computed('editInputLength', function () {
-    return stringToSeconds(this.get('editInputLength')).toString();
+    return parseStringToSeconds(this.get('editInputLength')).duration.toString();
   }),
 
   elementStartTime: Ember.computed('model.elements.@each.length', function() {
