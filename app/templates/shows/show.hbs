@@ -16,7 +16,7 @@
 
     <div class="panel-heading">
       <div class="row">
-        <div class="col-sm-4"><strong>Start Time:</strong> {{model.startTime}}</div>
+        <div class="col-sm-4"><strong>Start Time:</strong> {{if model.startTime model.startTime "00:00:00"}}</div>
         <div class="col-sm-4"><strong>Slot Length:</strong> {{format-length model.slotLength}}</div>
         <div class="col-sm-4">
           <strong>Show Length:</strong> {{format-length totalTime}}

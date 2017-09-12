@@ -44,12 +44,19 @@
         </p>
       </div>
 
-      <div class="form-group">
+      <div class="form-group {{if startTimeErrorMessage 'has-error'}}">
         <label for="show-modal-startTime">Start time:</label>
         {{input id="show-modal-startTime" class="form-control" type="text" value=startTime placeholder="Start time"}}
+        {{#if startTimeErrorMessage}}
+          <div>
+            <div id="show-model-slot-length-input-error-message" class="alert alert-danger text-center" role="alert">
+              {{startTimeErrorMessage}}
+            </div>
+          </div>
+        {{/if}}
         <p class="help-block">
-          The time the show starts. For example: 8pm, 8:30am.
-          <br>If blank or 0, the show start time is set to 00:00:00.
+          The time the show starts. For example: 8pm, 8:30am, or 23:00.
+          <br>If blank the show start time is displayed as 00:00:00. i.e., a relative time line.
         </p>
       </div>
     {{/bs-form}}
@@ -57,7 +64,7 @@
   {{/modal.body}}
   {{#modal.footer}}
     {{#bs-button onClick=(action modal.close)}}Cancel{{/bs-button}}
-    {{#bs-button type="primary" onClick=(action modal.submit)  disabled=isSubmitButtonDisabled}}{{submitButtonText}}{{/bs-button}}
+    {{#bs-button type="primary" onClick=(action modal.submit) disabled=isSubmitButtonDisabled}}{{submitButtonText}}{{/bs-button}}
   {{/modal.footer}}
 
 {{/bs-modal}}
