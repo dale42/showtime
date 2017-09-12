@@ -70,17 +70,18 @@ export default Ember.Component.extend({
       this.set('displayForm', false);
 
       const controller = this.get('controller');
-      let gotoShow = false;
-      let show = this.get('show');
+      let gotoShow  = false;
+      let show      = this.get('show');
 
       if (show === null) {
         show = controller.get('store').createRecord('show');
         gotoShow = true;
       }
 
+      const startTime = (form.startTime.length === 0) ? '' : moment(form.startTime, 'h:mma').format('h:mma');
       show.set('name', form.name);
       show.set('slotLength', this.get('slotLength').duration);
-      show.set('startTime', form.startTime);
+      show.set('startTime', startTime);
 
       return show.save().then(function () {
         if (gotoShow) {
