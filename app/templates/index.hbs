@@ -4,20 +4,31 @@
       <p><em>Show Time</em> is a simple time planning tool for radio shows.</p>
 
       <p>
-        Show elements with their respective lengths are added to a show and the total show length is displayed.
-        Elements can be edited and their order changed using drag & drop.
-        To provide this demo the browser's local storage is used.
-        Please see the <strong><em>Data Storage</em></strong> section (below) for details.
-        The show can be saved as a text file.
+        Using <em>Show Time</em> build a schedule of show items with their durations.
+        The start time of each item is calculated and displayed with the total show length.
+        Show elements can be edited and their order changed using drag & drop.
+        The show can also be saved as a text file.
       </p>
-
-      <p>This is a <a href="http://100daysofcode.com/">100 Days of Code</a> project.</p>
-
-      <p>Git Repository: <a href="https://github.com/dale42/showtime">github.com/dale42/showtime</a></p>
+      <p>
+        To save your data without using a server, the browser's local storage feature is used.
+        This means the information you enter is stored in your web browser,
+        as long as your browser configuration allows it.
+        Unless you have changed the settings your browser should allow it.
+        This makes <em>Show Time</em> available at no cost.
+        Please see the <strong><em>Data Storage</em></strong> section for details.
+      </p>
 
       <br>
 
       <p class="text-center">{{#link-to "shows"}}<button class="btn btn-primary btn-lg">Show Time Application</button> {{/link-to}}</p>
+    </div>
+  </div>
+
+  <div class="col-sm-12">
+    <div class="well well-sm">
+      <div class="text-center">
+        This is a <a href="http://100daysofcode.com/">100 Days of Code</a> project.
+        Git Repository: <a href="https://github.com/dale42/showtime">github.com/dale42/showtime</a></div>
     </div>
   </div>
 
@@ -29,34 +40,8 @@
       <div class="panel-body">
         <p>The project is being actively worked on.</p>
         <p>A number of new features are planned and will be added as time permits.</p>
+        <p class="h5">Known Issues</p>
         <p>There are known issues in Firefox and IE11 (see below). There are no known issues in Chrome.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2 class="panel-title">Entering Time Lengths</h2>
-      </div>
-      <div class="panel-body">
-        <p>This information will added to the show page, but isn't there yet.</p>
-        <p>Valid formats for entering time are:</p>
-        <ul>
-          <li>1 2 3</li>
-          <li>1:2:3</li>
-          <li>1h 2m 3s</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2 class="panel-title">Known Issues</h2>
-      </div>
-      <div class="panel-body">
         <ul>
           <li>Drag and drop sorting is not working in Firefox or IE11</li>
         </ul>
