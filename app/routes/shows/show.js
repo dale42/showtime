@@ -1,7 +1,7 @@
 // app/routes/shows/show.js
 
 import Ember from 'ember';
-import secondsToDisplayLength from '../../utils/seconds-to-display-length';
+import moment from 'moment';
 import FileSaver from "npm:file-saver";
 
 export default Ember.Route.extend({
@@ -35,24 +35,43 @@ export default Ember.Route.extend({
     },
 
     saveAsText() {
-      const elementStartTime = this.controller.get('elementStartTime');
-      const show = this.controller.get('model');
-      const showName = show.get('name');
+      const show              = this.controller.get('model');
+      const showName          = show.get('name');
+      const showStart         = show.get('startTime');
+      const showLength        = moment.duration(this.controller.get('totalTime'), 'seconds')
+                                  .format('h[h] m[m] s[s]').replace(' 0m 0s', '').replace(' 0s', '');
+      const slotLength        = moment.duration(show.get('slotLength'), 'seconds')
+                                  .format('h[hr] m[m] s[s]').replace(' 0m 0s', '').replace(' 0s', '');
+      const elementStartTime  = this.controller.get('elementStartTime');
       const longestNameLength = show.get('elements').reduce((longestLength, element) => {
         const nameLength = element.get('name').length;
         return (nameLength > longestLength) ? nameLength : longestLength;
       }, 0);
 
       let output = [];
+      // Title
       output.push(`${showName}\r\n`);
       output.push('='.repeat(showName.length) + '\r\n\r\n');
-      output.push('Run time: ' + secondsToDisplayLength(this.controller.get('totalTime')) + '\r\n\n');
+      // Show Meta
+      output.push(
+        ((showStart)  ? `Start: ${showStart} | ` : '') +
+        ((slotLength) ? `Slot: ${slotLength} | ` : '') +
+        `Length: ${showLength}\r\n\r\n`
+      );
+      // output.push(`Slot: ${slotLength} / Length: ${showLength}\r\n\n`);
       show.get('elements').forEach((element, position) => {
-        const startTime = secondsToDisplayLength(elementStartTime[position], 'colon');
+        const startOffset = elementStartTime[position];
+        const startTime = (showStart.length === 0) ?
+          moment.duration(startOffset, 'seconds').format('hh:mm:ss', { forceLength: true, trim: false }) :
+          moment(showStart, 'h:mma').add(startOffset, 'seconds').format('h:mm:ssa');
+
         const elementDisplayWidth = longestNameLength + 2;
-        const displayElement = element.get('name') + ' '.repeat(elementDisplayWidth - element.get('name').length);
-        const displayLength = secondsToDisplayLength(element.get('length'));
-        output.push(`- ${startTime} ${displayElement}${displayLength}\r\n`);
+        const displayElement      = element.get('name')
+                                      + ' '.repeat(elementDisplayWidth - element.get('name').length);
+        const displayLength       = moment.duration(element.get('length'), 'seconds')
+                                      .format('h[h] m[m] s[s]')
+                                      .replace(' 0m 0s', ' ').replace(' 0s', ' ');
+        output.push(`- ${startTime}  ${displayElement}${displayLength}\r\n`);
       });
 
       let blob = new Blob(output, {type: "text/plain;charset=utf-8"});
