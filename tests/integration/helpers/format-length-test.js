@@ -8,7 +8,7 @@ moduleForComponent('format-length', 'helper:format-length', {
 
 // Replace this with your real tests.
 test('it renders', function(assert) {
-  this.set('inputValue', '1234');
+  this.set('inputValue', 1234);
 
   this.render(hbs`{{format-length inputValue}}`);
 
