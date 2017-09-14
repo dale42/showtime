@@ -76,6 +76,27 @@ export default Ember.Route.extend({
 
       let blob = new Blob(output, {type: "text/plain;charset=utf-8"});
       FileSaver.saveAs(blob, `${showName}.txt`);
+    },
+
+    saveAsCsv() {
+      const show          = this.controller.get('model');
+      const showStart     = show.get('startTime');
+      const elementOffset = this.controller.get('elementStartTime');
+
+      const csvData = show.get('elements').map(function(element, index) {
+        const startTime = (showStart.length === 0) ?
+          moment.duration(this[index], 'seconds').format('hh:mm:ss', { forceLength: true, trim: false }) :
+          moment(showStart, 'h:mma').add(this[index], 'seconds').format('h:mm:ssa');
+        const displayLength = moment.duration(element.get('length'), 'seconds')
+          .format('h[h] m[m] s[s]')
+          .replace(' 0m 0s', ' ').replace(' 0s', ' ');
+        const name = element.get('name').replace(/"/g, '""');
+        return [`"${startTime}","${name}","${displayLength}"\r\n`];
+      }, elementOffset);
+      csvData.unshift(['"Start","Name","Length"\r\n']);
+
+      let blob = new Blob(csvData, {type: "data/plain;charset=utf-8"});
+      FileSaver.saveAs(blob, show.get('name') + '.csv');
     }
 
   }
