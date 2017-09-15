@@ -3,6 +3,7 @@
 import Ember from 'ember';
 import parseStringToSeconds from '../../utils/parse-string-to-seconds';
 import secondsToDisplayLength from '../../utils/seconds-to-display-length';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
   displayShowForm: false,
@@ -76,8 +77,19 @@ export default Ember.Controller.extend({
     return total;
   }),
 
-  overUnder: Ember.computed('model.elements.@each.length', 'model.slotLength', function() {
-    return this.get('totalTime') - this.get('model').get('slotLength');
+  overUnder: Ember.computed('totalTime', 'model.slotLength', function() {
+    const slotLength = this.get('model.slotLength');
+    if (!slotLength) {
+      return '';
+    }
+    const diff = this.get('totalTime') - slotLength;
+    if (diff === 0) {
+      return '';
+    }
+    const overUnder = (diff > 0) ? 'over' : 'under';
+    const duration = moment.duration(diff, 'seconds').format('h[h] m[m] s[s]');
+
+    return `${duration} ${overUnder}`;
   }),
 
   actions: {
