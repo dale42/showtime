@@ -27,6 +27,7 @@
 
     <div class="panel-footer">
       {{#bs-button type="primary" size="xs" onClick=(action (mut displayShowForm) true)}}Create show{{/bs-button}}
+      {{upload-show store=this.store}}
     </div>
   </div>
 </div>
