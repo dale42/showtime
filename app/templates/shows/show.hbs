@@ -84,6 +84,7 @@
 </div>
 
 <div class="row">
+  {{#save-show show=model}}Save to file{{/save-show}}
   <button class="btn btn-primary" {{action "saveAsText"}} >Save as text</button>
   <button class="btn btn-primary" {{action "saveAsCsv"}} >Save as CSV</button>
 </div>
