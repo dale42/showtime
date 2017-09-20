@@ -119,11 +119,11 @@
   onSubmit=(action "deleteElement" elementToDelete)
   onHide=(action (mut elementToDelete) null)
 }}
-  <p>
+  <p class="lead">
     You're about to delete:
     <strong><em>{{elementToDelete.name}} ({{format-length elementToDelete.length}})</em></strong>
   </p>
-  <p>Are you sure?</p>
+  <p class="lead">Are you sure?</p>
 {{/bs-modal-simple}}
 
 {{show-edit-create-modal displayForm=displayShowForm show=model controller=this}}

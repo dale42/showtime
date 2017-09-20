@@ -43,9 +43,9 @@
   onSubmit=(action "deleteShow" showToDelete)
   onHide=(action (mut showToDelete) null)
 }}
-  <p>You're about to delete the following show and all of it's show elements:</p>
-  <p class="text-center"><strong><em>{{showToDelete.name}}</em></strong></p>
-  <p>Are you sure?</p>
+  <p class="lead">You're about to delete the following show and all of it's show elements:</p>
+  <p class="text-center lead"><strong><em>{{showToDelete.name}}</em></strong></p>
+  <p class="lead">Are you sure?</p>
 {{/bs-modal-simple}}
 
 {{show-edit-create-modal displayForm=displayShowForm show=null controller=this}}
